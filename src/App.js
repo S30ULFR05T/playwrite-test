@@ -10,8 +10,8 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path='/' element={<Profiles />} />
-          <Route path='/signup' element={<SignUp />} />
+          <Route path='/' element={<SignUp />} />
+          <Route path='/signup' element={<Profiles />} />
         </Routes>
       </BrowserRouter>
     </div>
