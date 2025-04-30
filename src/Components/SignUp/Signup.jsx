@@ -33,7 +33,8 @@ function Signup() {
           <div className="form-row">
             <div className="form-group">
               <label>Password*</label>
-              <input type="password" placeholder="Use A-Z, a-z, 0-9, !@#$%^&*" />
+              <input type="password" placeholder="Enter password" />
+              <span className='password-span'>Use A-Z, a-z, 0-9, !@#$%^&*</span>
             </div>
             <div className="form-group">
               <label>Re - Password*</label>
