@@ -1,0 +1,40 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    padding: 0;
+    margin: 0;
+    background-color: #d4d4d4;
+}
+
+.main-container {
+    border-bottom: 1px solid #404040;
+}
+
+.navbar-container {
+    margin: 16px 120px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: blue;
+}
+
+.logo span {
+    color: black;
+}
+
+.options {
+    display: flex;
+    gap: 32px;
+}
+
+.options p {
+    cursor: pointer;
+    color: black;
+  }
+  
+  .options p.active-option {
+    color: blue;
+    font-weight: 500;
+  }
