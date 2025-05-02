@@ -1,62 +1,93 @@
-import React from 'react'
-import './Signup.css'
+import React, { useState } from 'react';
+import './Signup.css';
 
 function Signup() {
+  const [formData, setFormData] = useState({
+    firstname: '',
+    lastname: '',
+    email: '',
+    phone: '',
+    password: '',
+    rePassword: '',
+    dob: '',
+    city: '',
+    state: ''
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    fetch('http://localhost/playwrite-test-backend/singup.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    })
+      .then(response => response.text())
+      .then(data => alert(data.message))
+      .catch(error => console.error('Error:', error));
+  };
+
   return (
-    <div>
-      <div className="signup-page">
+    <div className="signup-page">
       <h2 className="signup-heading">Sign Up for Profile</h2>
       <div className="form-container">
-        <form className="signup-form">
+        <form className="signup-form" onSubmit={handleSubmit}>
+          {/* Update input fields to use value and onChange */}
           <div className="form-row">
             <div className="form-group">
               <label>First Name*</label>
-              <input type="text" placeholder="Enter your first name" />
+              <input name="firstname" type="text" placeholder="Enter your first name" value={formData.firstname} onChange={handleChange} />
             </div>
             <div className="form-group">
               <label>Last Name</label>
-              <input type="text" placeholder="Enter your last name" />
+              <input name="lastname" type="text" placeholder="Enter your last name" value={formData.lastname} onChange={handleChange} />
             </div>
           </div>
-
+          {/* Repeat for other fields with same pattern */}
           <div className="form-row">
             <div className="form-group">
               <label>Email Address*</label>
-              <input type="email" placeholder="Enter your email" />
+              <input name="email" type="email" placeholder="Enter your email" value={formData.email} onChange={handleChange} />
             </div>
             <div className="form-group">
               <label>Phone Number</label>
-              <input type="tel" placeholder="Enter your phone number" />
+              <input name="phone" type="tel" placeholder="Enter your phone number" value={formData.phone} onChange={handleChange} />
             </div>
           </div>
 
           <div className="form-row">
             <div className="form-group">
               <label>Password*</label>
-              <input type="password" placeholder="Enter password" />
+              <input name="password" type="password" placeholder="Enter password" value={formData.password} onChange={handleChange} />
               <span className='password-span'>Use A-Z, a-z, 0-9, !@#$%^&*</span>
             </div>
             <div className="form-group">
               <label>Re - Password*</label>
-              <input type="password" placeholder="Re-enter password" />
+              <input name="rePassword" type="password" placeholder="Re-enter password" value={formData.rePassword} onChange={handleChange} />
             </div>
           </div>
 
           <div className="form-row">
             <div className="form-group full-width">
               <label>Date of Birth</label>
-              <input type="date" />
+              <input name="dob" type="date" value={formData.dob} onChange={handleChange} />
             </div>
           </div>
 
           <div className="form-row">
             <div className="form-group">
               <label>City</label>
-              <input type="text" placeholder="City" />
+              <input name="city" type="text" placeholder="City" value={formData.city} onChange={handleChange} />
             </div>
             <div className="form-group">
               <label>State</label>
-              <input type="text" placeholder="State" />
+              <input name="state" type="text" placeholder="State" value={formData.state} onChange={handleChange} />
             </div>
           </div>
 
@@ -64,8 +95,7 @@ function Signup() {
         </form>
       </div>
     </div>
-    </div>
-  )
+  );
 }
 
-export default Signup
+export default Signup;
