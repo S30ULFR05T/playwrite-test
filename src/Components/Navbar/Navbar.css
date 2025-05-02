@@ -29,12 +29,13 @@
     gap: 32px;
 }
 
-.options p {
-    cursor: pointer;
+.options a {
+    text-decoration: none;
     color: black;
+    cursor: pointer;
   }
   
-  .options p.active-option {
+  .options a.active-option {
     color: blue;
     font-weight: 500;
   }

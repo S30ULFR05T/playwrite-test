@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Navbar.css';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   const [activeOption, setActiveOption] = useState('Profiles');
@@ -11,18 +12,20 @@ function Navbar() {
           <h2>Profile <span>Hub</span></h2>
         </div>
         <div className="options">
-          <p
+          <Link
+            to="/"
             className={activeOption === 'Profiles' ? 'active-option' : ''}
             onClick={() => setActiveOption('Profiles')}
           >
             Profiles
-          </p>
-          <p
+          </Link>
+          <Link
+            to="/signup"
             className={activeOption === 'Sign Up' ? 'active-option' : ''}
             onClick={() => setActiveOption('Sign Up')}
           >
             Sign Up
-          </p>
+          </Link>
         </div>
       </div>
     </div>
