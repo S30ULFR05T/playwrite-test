@@ -14,12 +14,24 @@ function Signup() {
     state: ''
   });
 
+  const [formErrors, setFormErrors] = useState({
+    passwordMismatch: '',
+  });
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === 'password' || e.target.name === 'rePassword') {
+      setFormErrors({ ...formErrors, passwordMismatch: '' });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (formData.password !== formData.rePassword) {
+      setFormErrors({ ...formErrors, passwordMismatch: 'Passwords do not match.' });
+      return;
+    }
 
     fetch('http://localhost/playwrite-test-backend/singup.php', {
       method: 'POST',
@@ -70,6 +82,10 @@ function Signup() {
             <div className="form-group">
               <label>Re - Password*</label>
               <input name="rePassword" type="password" placeholder="Re-enter password" value={formData.rePassword} onChange={handleChange} />
+              {/* Show password mismatch error */}
+              {formErrors.passwordMismatch && (
+                <div className="error-message">{formErrors.passwordMismatch}</div>
+              )}
             </div>
           </div>
 
