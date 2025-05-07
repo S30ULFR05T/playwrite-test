@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import './Profiles.css'
+import { useNavigate } from 'react-router-dom';
 
 function Profiles() {
   const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate(); // React Router hook
+
+  const handleEdit = (profile) => {
+    navigate(`/signup/${profile.id}`, { state: { profile } });
+  };
 
   useEffect(() => {
     fetch('http://localhost/playwrite-test-backend/profile.php')
@@ -52,6 +59,7 @@ function Profiles() {
                 <th>DOB</th>
                 <th>City</th>
                 <th>State</th>
+                <th>Action</th> 
               </tr>
             </thead>
             <tbody>
@@ -66,6 +74,9 @@ function Profiles() {
                   <td>{profile.dob}</td>
                   <td>{profile.city}</td>
                   <td>{profile.state}</td>
+                  <td>
+              <button onClick={() => handleEdit(profile)}>Edit</button>
+            </td>
                 </tr>
               ))}
             </tbody>
