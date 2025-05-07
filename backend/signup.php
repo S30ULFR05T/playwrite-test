@@ -1,20 +1,29 @@
 <?php
 // CORS and content headers
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST"); // Allow specific methods
+header("Access-Control-Allow-Origin: *"); // Allow the frontend URL
+header("Access-Control-Allow-Methods: POST, OPTIONS"); // Allow POST and OPTIONS methods
 header("Access-Control-Allow-Headers: Content-Type, Authorization"); // Allow specific headers
 header("Content-Type: application/json");
+
+// Handle OPTIONS request (pre-flight request)
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    // Respond to preflight request
+    http_response_code(200);
+    exit;
+}
+
+$method = $_SERVER['REQUEST_METHOD'];
+
+if ($method !== 'POST') {
+    http_response_code(405);
+    echo json_encode(["message" => "Only POST method is allowed"]);
+    exit;
+}
 
 // Database connection details
 require_once 'db.php';
 
-// Ensure it's a POST request
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo json_encode(["status" => "error", "message" => "Only POST method allowed."]);
-    exit();
-}
-
-// Get JSON input
+// Read input JSON
 $input = json_decode(file_get_contents("php://input"), true);
 
 // Check required fields
