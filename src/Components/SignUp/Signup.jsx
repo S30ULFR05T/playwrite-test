@@ -22,14 +22,14 @@ function Signup() {
     phone: '',
     dob: '',
     state: '',
-    general: '' // ✅ Added for optional general error message
+    general: ''
   });
 
-  const [successMessage, setSuccessMessage] = useState(''); // ✅ Added for Playwright to detect
-  const { id } = useParams();
-  const location = useLocation();
+  const [successMessage, setSuccessMessage] = useState(''); // State for success message
+  const { id } = useParams(); // Get id from URL params
+  const location = useLocation(); // Get location object to check if editing a profile
 
-  // ✅ Load existing profile data if editing
+  // Set initial form data if editing a profile
   useEffect(() => {
     if (location.state?.profile) {
       setFormData({ ...location.state.profile, rePassword: location.state.profile.password });
@@ -58,14 +58,14 @@ function Signup() {
     if (!formData.dob) newFormErrors.dob = 'Date of birth is required.';
     if (!formData.state) newFormErrors.state = 'State is required.';
 
-    // ✅ Optional generic error message for Playwright/general UI
+    // Show general error message if there are any form errors
     if (Object.keys(newFormErrors).length > 0) {
       newFormErrors.general = 'Please fill out all required fields.';
       setFormErrors(newFormErrors);
       return;
     }
 
-    // Proceed with form submission if no errors
+    // If id is present, it's an update; otherwise, it's a signup
     const method = id ? 'PUT' : 'POST';
     const endpoint = id
       ? `http://localhost/playwrite-test-backend/editprofile.php?id=${id}`
@@ -83,11 +83,11 @@ function Signup() {
     })
       .then(response => response.json())
       .then(data => {
-        // Show success message visibly on screen for Playwright to detect
+        // Handle success or error response from the server and playwright detection
         if (data.message) {
-          setSuccessMessage(data.message);
+          setSuccessMessage(data.message);  // Show message from the server
         } else {
-          setSuccessMessage('User signed up successfully'); // fallback
+          setSuccessMessage('User signed up successfully'); // if there is no message from the server it will show this
         }
       })
       .catch(error => console.error('Error:', error));
