@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 function Profiles() {
   const [profiles, setProfiles] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);   // true/false flag to show if data is still loading
   const [error, setError] = useState(null);
 
-  const navigate = useNavigate(); // React Router hook
+  const navigate = useNavigate();   // allows redirection to other routes (pages)
 
   const handleEdit = (profile) => {
     navigate(`/signup/${profile.id}`, { state: { profile } });
@@ -42,7 +42,7 @@ function Profiles() {
       <h2 className="profile-heading">List of all Profiles</h2>
 
       {loading ? (
-        <p>Loading profiles...</p>
+        <p>Profiles are loading...</p>
       ) : error ? (
         <p style={{ color: 'red' }}>Error: {error}</p>
       ) : (
@@ -75,7 +75,7 @@ function Profiles() {
                   <td>{profile.city}</td>
                   <td>{profile.state}</td>
                   <td>
-              <button onClick={() => handleEdit(profile)}>Edit</button>
+              <button onClick={() => handleEdit(profile)}>Edit</button> 
             </td>
                 </tr>
               ))}
