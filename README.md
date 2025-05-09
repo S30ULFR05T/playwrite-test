@@ -1,70 +1,139 @@
-# Getting Started with Create React App
+# ProfileHub
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ProfileHub is a web application built with React for managing user profiles. It includes features for signing up, editing profiles, and viewing a list of all profiles. The backend is implemented in PHP and uses a MySQL database.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- User signup with form validation.
+- Edit existing profiles.
+- View a list of all profiles.
+- Backend API for managing user data.
+- End-to-end testing with Playwright.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Before starting, ensure you have the following installed:
 
-### `npm test`
+1. **Node.js** (v16 or later)
+2. **npm** (comes with Node.js)
+3. **XAMPP** (or any other local server with PHP and MySQL support)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Getting Started
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. Clone the Repository
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone <repository-url>
+cd playwrite-test
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+-----------------------------------------
 
-### `npm run eject`
+2. Install Dependencies
+Run the following command to install the required dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+npm install
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Set Up the Database
+Open XAMPP and start the Apache and MySQL services.
+Open phpMyAdmin by navigating to http://localhost/phpmyadmin in your browser.
+Create a new database named playwrite-test-db.
+Import the database schema<vscode_annotation details='%5B%7B%22title%22%3A%22hardcoded-credentials%22%2C%22description%22%3A%22Embedding%20credentials%20in%20source%20code%20risks%20unauthorized%20access%22%7D%5D'>: </vscode_annotation> - Go to the Import tab in phpMyAdmin.
+Select the file located at backend/db/users.sql.
+Click Go to import the database schema and sample data.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+4. Configure the Backend
+Ensure the backend files are located in the htdocs folder of your XAMPP installation. For example:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+C:\xampp\htdocs\playwrite-test-backend
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+Verify the database connection in backend/db.php:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<?php
+$host = 'localhost';        // Database host
+$username = 'root';         // Database username
+$password = '';             // Database password
+$database = 'playwrite-test-db'; // Database name
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+5. Start the Frontend
+Run the following command to start the React development server:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+npm start
 
-### `npm run build` fails to minify
+The application will be available at http://localhost:3000.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+6. Run Playwright Tests
+To run the Playwright end-to-end tests:
+
+Ensure the frontend is running on http://localhost:3000.
+Run the following command:
+
+
+npx playwright test
+
+
+
+Project Structure
+
+playwrite-test/
+├── backend/                # Backend PHP files
+│   ├── [db.php](http://_vscodecontentref_/1)              # Database connection
+│   ├── [profile.php](http://_vscodecontentref_/2)         # Fetch profiles API
+│   ├── [signup.php](http://_vscodecontentref_/3)          # Signup API
+│   ├── [editprofile.php](http://_vscodecontentref_/4)     # Edit profile API
+│   └── db/                 # Database schema
+│       └── [users.sql](http://_vscodecontentref_/5)
+├── public/                 # Public assets
+├── src/                    # React frontend source code
+│   ├── Components/         # React components
+│   │   ├── Navbar/         # Navbar component
+│   │   ├── ProfileList/    # Profile list component
+│   │   └── SignUp/         # Signup form component
+│   ├── [App.js](http://_vscodecontentref_/6)              # Main React app
+│   ├── [index.js](http://_vscodecontentref_/7)            # React entry point
+│   └── [setupTests.js](http://_vscodecontentref_/8)       # Jest setup
+├── tests/                  # Playwright tests
+│   └── [signup.spec.js](http://_vscodecontentref_/9)      # Signup form tests
+├── [package.json](http://_vscodecontentref_/10)            # Project dependencies and scripts
+├── [playwright.config.js](http://_vscodecontentref_/11)    # Playwright configuration
+└── [README.md](http://_vscodecontentref_/12)               # Project documentation
+
+
+
+API Endpoints
+1. GET /profile.php
+Fetches all user profiles.
+
+2. POST /signup.php
+Creates a new user profile.
+
+3. PUT /editprofile.php?id={id}
+Updates an existing user profile.
+
+
+
+Troubleshooting
+Common Issues
+Database Connection Error
+
+Ensure XAMPP is running and the database credentials in db.php are correct.
+Frontend Not Loading
+
+Ensure the React development server is running on http://localhost:3000.
+Playwright Tests Failing
+
+Verify that the frontend is running and accessible at http://localhost:3000.
