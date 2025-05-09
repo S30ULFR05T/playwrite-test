@@ -16,10 +16,10 @@ test.describe('Signup Form Tests', () => {
     await page.fill('input[name="city"]', 'New York');
     await page.fill('input[name="state"]', 'NY');
 
-    // Submit the form
+    // Submit the form by pressing button
     await page.click('button[type="submit"]');
 
-    // Expect success message to appear
+    // Success message appear after submission
     await expect(page.locator('.success-message')).toBeVisible();
   });
 
@@ -40,7 +40,7 @@ test.describe('Signup Form Tests', () => {
     // Submit the form
     await page.click('button[type="submit"]');
 
-    // Expect error message for mismatched passwords
+    // Error message for mismatched password
     // eslint-disable-next-line testing-library/prefer-screen-queries
     await expect(page.getByText('Passwords do not match.')).toBeVisible();
   });
@@ -48,21 +48,21 @@ test.describe('Signup Form Tests', () => {
   test('Invalid Signup form submission - Missing fields', async ({ page }) => {
     await page.goto('/signup');
 
-    // Leave some required fields blank
-    await page.fill('input[name="firstname"]', '');
+    // Required fields are missing
+    await page.fill('input[name="firstname"]', '');   // first name is missing
     await page.fill('input[name="lastname"]', 'Doe');
-    await page.fill('input[name="email"]', '');
-    await page.fill('input[name="phone"]', '');
-    await page.fill('input[name="password"]', 'Test@1234');
+    await page.fill('input[name="email"]', '');   // email is missing
+    await page.fill('input[name="phone"]', '');   // phone is missing
+    await page.fill('input[name="password"]', 'Test@1234'); 
     await page.fill('input[name="rePassword"]', 'Test@1234');
-    await page.fill('input[name="dob"]', '');
-    await page.fill('input[name="city"]', 'New York');
-    await page.fill('input[name="state"]', '');
+    await page.fill('input[name="dob"]', '');   // dob is missing
+    await page.fill('input[name="city"]', 'New York');  
+    await page.fill('input[name="state"]', '');   // state is missing
 
     // Submit the form
     await page.click('button[type="submit"]');
 
-    // Expect error messages to be visible
+    // Error message show in ui (any of this error show in ui then test is passed)
     await expect(page.locator('.error-message')).toContainText([
       'First name is required.',
       'Email is required.',
