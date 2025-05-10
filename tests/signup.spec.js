@@ -8,13 +8,13 @@ test.describe('Signup Form Tests', () => {
     // Fill the signup form with valid data
     await page.fill('input[name="firstname"]', 'Saurabh');
     await page.fill('input[name="lastname"]', 'Doe');
-    await page.fill('input[name="email"]', 'john@example.com');
+    await page.fill('input[name="email"]', 'saurabhdoe@gmail.com');
     await page.fill('input[name="phone"]', '1234567890');
-    await page.fill('input[name="password"]', 'Test@1234');
-    await page.fill('input[name="rePassword"]', 'Test@1234');
-    await page.fill('input[name="dob"]', '2000-01-01');
-    await page.fill('input[name="city"]', 'New York');
-    await page.fill('input[name="state"]', 'NY');
+    await page.fill('input[name="password"]', 'Testing@1234');
+    await page.fill('input[name="rePassword"]', 'Testing@1234');
+    await page.fill('input[name="dob"]', '2000-01-24');
+    await page.fill('input[name="city"]', 'Delhi');
+    await page.fill('input[name="state"]', 'New Delhi');
 
     // Submit the form by pressing button
     await page.click('button[type="submit"]');
@@ -27,15 +27,15 @@ test.describe('Signup Form Tests', () => {
     await page.goto('/signup');
 
     // Fill the signup form with mismatched passwords
-    await page.fill('input[name="firstname"]', 'John');
-    await page.fill('input[name="lastname"]', 'Doe');
-    await page.fill('input[name="email"]', 'john@example.com');
+    await page.fill('input[name="firstname"]', 'Suresh');
+    await page.fill('input[name="lastname"]', 'Prasad');
+    await page.fill('input[name="email"]', 'sureshprasad@gmail.com');
     await page.fill('input[name="phone"]', '1234567890');
-    await page.fill('input[name="password"]', 'Test@1234');
-    await page.fill('input[name="rePassword"]', 'Test@5678'); // Mismatched password
-    await page.fill('input[name="dob"]', '2000-01-01');
-    await page.fill('input[name="city"]', 'New York');
-    await page.fill('input[name="state"]', 'NY');
+    await page.fill('input[name="password"]', 'Test@123412');
+    await page.fill('input[name="rePassword"]', 'Test@567890'); // Mismatched password
+    await page.fill('input[name="dob"]', '2000-01-24');
+    await page.fill('input[name="city"]', 'New Delhi');
+    await page.fill('input[name="state"]', 'New Delhi');
 
     // Submit the form
     await page.click('button[type="submit"]');
@@ -50,13 +50,13 @@ test.describe('Signup Form Tests', () => {
 
     // Required fields are missing
     await page.fill('input[name="firstname"]', '');   // first name is missing
-    await page.fill('input[name="lastname"]', 'Doe');
+    await page.fill('input[name="lastname"]', 'Kumar');
     await page.fill('input[name="email"]', '');   // email is missing
     await page.fill('input[name="phone"]', '');   // phone is missing
-    await page.fill('input[name="password"]', 'Test@1234'); 
-    await page.fill('input[name="rePassword"]', 'Test@1234');
+    await page.fill('input[name="password"]', 'TestingSomething@1234'); 
+    await page.fill('input[name="rePassword"]', 'TestSomething@1234');
     await page.fill('input[name="dob"]', '');   // dob is missing
-    await page.fill('input[name="city"]', 'New York');  
+    await page.fill('input[name="city"]', 'New Delhi');  
     await page.fill('input[name="state"]', '');   // state is missing
 
     // Submit the form

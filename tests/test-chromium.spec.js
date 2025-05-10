@@ -9,14 +9,14 @@ const { chromium } = require('playwright');
   await page.goto('http://localhost:3000/signup');
 
   await page.fill('input[name="firstname"]', 'Saurabh');
-  await page.fill('input[name="lastname"]', 'Doe');
-  await page.fill('input[name="email"]', 'john@example.com');
+  await page.fill('input[name="lastname"]', 'Kumar');
+  await page.fill('input[name="email"]', 'sk000@gmail.com');
   await page.fill('input[name="phone"]', '1234567890');
-  await page.fill('input[name="password"]', 'Test@1234');
-  await page.fill('input[name="rePassword"]', 'Test@1234');
-  await page.fill('input[name="dob"]', '2000-01-01');
-  await page.fill('input[name="city"]', 'New York');
-  await page.fill('input[name="state"]', 'NY');
+  await page.fill('input[name="password"]', 'Saurabh@1234');
+  await page.fill('input[name="rePassword"]', 'Saurabh@1234');
+  await page.fill('input[name="dob"]', '2000-01-06');
+  await page.fill('input[name="city"]', 'Mumbai');
+  await page.fill('input[name="state"]', 'Maharastra');
 
   await page.click('button[type="submit"]');
 
@@ -30,15 +30,15 @@ const { chromium } = require('playwright');
   // Password mismatch
   await page.goto('http://localhost:3000/signup');
 
-  await page.fill('input[name="firstname"]', 'John');
-  await page.fill('input[name="lastname"]', 'Doe');
-  await page.fill('input[name="email"]', 'john@example.com');
+  await page.fill('input[name="firstname"]', 'Suraj');
+  await page.fill('input[name="lastname"]', 'Kumar');
+  await page.fill('input[name="email"]', 'kumarsuraj@yahoo.com');
   await page.fill('input[name="phone"]', '1234567890');
-  await page.fill('input[name="password"]', 'Test@1234');
-  await page.fill('input[name="rePassword"]', 'Test@5678'); // password is different
+  await page.fill('input[name="password"]', 'Suraj@1234');
+  await page.fill('input[name="rePassword"]', 'Suraj@5678'); // password is different
   await page.fill('input[name="dob"]', '2000-01-01');
-  await page.fill('input[name="city"]', 'New York');
-  await page.fill('input[name="state"]', 'NY');
+  await page.fill('input[name="city"]', 'New Mumabi');
+  await page.fill('input[name="state"]', 'Delhi');
 
   await page.click('button[type="submit"]');
 
@@ -53,13 +53,13 @@ const { chromium } = require('playwright');
   await page.goto('http://localhost:3000/signup');
 
   await page.fill('input[name="firstname"]', '');   // firstname is missing
-  await page.fill('input[name="lastname"]', 'Doe');
+  await page.fill('input[name="lastname"]', 'Singh');
   await page.fill('input[name="email"]', '');   // email is missing
   await page.fill('input[name="phone"]', '');   //phone is missing
-  await page.fill('input[name="password"]', 'Test@1234');
-  await page.fill('input[name="rePassword"]', 'Test@1234');
+  await page.fill('input[name="password"]', 'singh@1234');
+  await page.fill('input[name="rePassword"]', 'singh@1234');
   await page.fill('input[name="dob"]', ''); // dob is missing
-  await page.fill('input[name="city"]', 'New York');
+  await page.fill('input[name="city"]', 'New Gujrat');
   await page.fill('input[name="state"]', '');   //state name is missing
 
   await page.click('button[type="submit"]');
